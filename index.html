@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-2">
-                <h2 id="todo-title">Todo</h2>
+                <h2 id="todo-title">To Do</h2>
                 <div id="todo-container" class="hide">
                     <ul id="todo">
                     </ul>
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="clock">
             <div class="col-md-6 col-md-offset-3 text-center">
                 <h1 id="time"></h1>
             </div>
@@ -28,7 +28,39 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js"></script>
     <script type="text/javascript" src="https://mcginnis92.github.io/dom/logic.js"></script>
     <script type="text/javascript">
+    
     var time = moment().format('LT');
+    
+    var setTime = function (){
+        console.log('time');
+        $('#time').text(time);
+    }
+
+    setInterval(setTime, 1000);
+
+    //show to do list
+    var showList = function (){
+        $('#todo-container').toggleClass('hide');
+        }
+    $('#todo-title').on('click', showList);
+    
+
+    //add item to to-do list
+    var todoEmpty = [];
+
+    var updateList = function (){
+        var item = prompt('Enter a new item for your list.');
+        todoEmpty.push(item);
+        var listHTML = '';
+
+            for (var i = 0; i < todoEmpty.length; i++) {
+            listHTML += '<li>' + todoEmpty[i] + '</li>';
+        }
+            var listItems = document.querySelector('#todo');
+            listItems.innerHTML = listHTML;
+    }
+    
+    $('#plus').on('click', updateList);
 
     </script>
 </body>
